@@ -1,10 +1,10 @@
+
 // import axios from "axios";
 
 
 // const API = axios.create({
 
-// baseURL:
-// "http://localhost:5000/api",
+// baseURL:"http://localhost:5000/api",
 
 // headers:{
 // "Content-Type":"application/json"
@@ -20,7 +20,8 @@
 
 
 // const token =
-// localStorage.getItem("token");
+// localStorage.getItem("adminToken");
+
 
 
 // if(token){
@@ -31,8 +32,16 @@
 // }
 
 
+
 // return config;
 
+
+// },
+
+
+// (error)=>{
+
+// return Promise.reject(error);
 
 // }
 
@@ -46,11 +55,13 @@ import axios from "axios";
 
 const API = axios.create({
 
-baseURL:"http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL,
 
-headers:{
-"Content-Type":"application/json"
-}
+  headers:{
+    "Content-Type":"application/json"
+  },
+
+  withCredentials:true
 
 });
 
@@ -65,14 +76,12 @@ const token =
 localStorage.getItem("adminToken");
 
 
-
 if(token){
 
 config.headers.Authorization =
 `Bearer ${token}`;
 
 }
-
 
 
 return config;
@@ -88,7 +97,6 @@ return Promise.reject(error);
 }
 
 );
-
 
 
 export default API;
