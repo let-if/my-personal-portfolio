@@ -19,10 +19,7 @@ import {
 } from "../../services/projectService";
 
 
-import {
-  projectCategories
-} from "../../data/projectCategories";
-
+import { projectCategories } from "../../data/ProjectCategories";
 
 
 
