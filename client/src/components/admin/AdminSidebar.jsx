@@ -268,24 +268,42 @@ function AdminSidebar() {
   ];
 
   return (
+    // <aside
+    //   className="
+    //   hidden
+    //   lg:flex
+    //   w-80
+    //   flex-col
+    //   justify-between
+    //   border-r
+    //   border-cyan-400/10
+    //   bg-gradient-to-b
+    //   from-slate-950/95
+    //   via-slate-900/95
+    //   to-black/95
+    //   backdrop-blur-3xl
+    //   shadow-[0_0_60px_rgba(6,182,212,0.08)]
+    //   overflow-hidden
+    // "
+    // >
     <aside
-      className="
-      hidden
-      lg:flex
-      w-80
-      flex-col
-      justify-between
-      border-r
-      border-cyan-400/10
-      bg-gradient-to-b
-      from-slate-950/95
-      via-slate-900/95
-      to-black/95
-      backdrop-blur-3xl
-      shadow-[0_0_60px_rgba(6,182,212,0.08)]
-      overflow-hidden
-    "
-    >
+className="
+flex
+w-80
+flex-col
+justify-between
+border-r
+border-cyan-400/10
+bg-gradient-to-b
+from-slate-950/95
+via-slate-900/95
+to-black/95
+backdrop-blur-3xl
+shadow-[0_0_60px_rgba(6,182,212,0.08)]
+overflow-hidden
+h-screen
+"
+>
       {/* Decorative Glow */}
       <div className="absolute left-0 top-0 h-80 w-80 rounded-full bg-cyan-500/10 blur-[120px]" />
       <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-blue-500/10 blur-[120px]" />
