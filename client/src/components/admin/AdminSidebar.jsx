@@ -268,24 +268,7 @@ function AdminSidebar() {
   ];
 
   return (
-    // <aside
-    //   className="
-    //   hidden
-    //   lg:flex
-    //   w-80
-    //   flex-col
-    //   justify-between
-    //   border-r
-    //   border-cyan-400/10
-    //   bg-gradient-to-b
-    //   from-slate-950/95
-    //   via-slate-900/95
-    //   to-black/95
-    //   backdrop-blur-3xl
-    //   shadow-[0_0_60px_rgba(6,182,212,0.08)]
-    //   overflow-hidden
-    // "
-    // >
+   
     <aside
 className="
 flex

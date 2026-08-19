@@ -1,6 +1,6 @@
 import prisma from "../config/db.js";
 
-
+import { uploadToCloudinary } from "../utils/uploadCloudinary.js";
 
 // GET ALL
 
@@ -77,7 +77,6 @@ next(error);
 
 
 // CREATE
-
 export async function createProject(req,res,next){
 
 try{
@@ -101,12 +100,26 @@ technologies
 
 
 
-const image =
-req.file
-?
-`/uploads/projects/${req.file.filename}`
-:
-null;
+let image = null;
+
+
+
+if(req.file){
+
+
+const uploaded = await uploadToCloudinary(
+
+req.file,
+
+"portfolio/projects"
+
+);
+
+
+image = uploaded.secure_url;
+
+
+}
 
 
 
@@ -118,15 +131,11 @@ data:{
 
 title,
 
-
 description,
-
 
 image,
 
-
 github,
-
 
 demo,
 
@@ -141,6 +150,7 @@ JSON.parse(technologies)
 
 }
 
+
 });
 
 
@@ -154,14 +164,100 @@ data:project
 });
 
 
+}
 
-}catch(error){
+catch(error){
 
 next(error);
 
 }
 
+
 }
+// export async function createProject(req,res,next){
+
+// try{
+
+
+// const {
+
+// title,
+
+// description,
+
+// github,
+
+// demo,
+
+// featured,
+
+// technologies
+
+// }=req.body;
+
+
+
+// const image =
+// req.file
+// ?
+// `/uploads/projects/${req.file.filename}`
+// :
+// null;
+
+
+
+// const project =
+// await prisma.project.create({
+
+// data:{
+
+
+// title,
+
+
+// description,
+
+
+// image,
+
+
+// github,
+
+
+// demo,
+
+
+// featured:
+// featured==="true",
+
+
+// technologies:
+// JSON.parse(technologies)
+
+
+// }
+
+// });
+
+
+
+// res.status(201).json({
+
+// success:true,
+
+// data:project
+
+// });
+
+
+
+// }catch(error){
+
+// next(error);
+
+// }
+
+// }
 
 
 
@@ -305,6 +401,97 @@ next(error);
 
 // }
 
+// // }
+// export async function updateProject(req,res,next){
+
+// try{
+
+
+// const {
+
+// title,
+
+// description,
+
+// github,
+
+// demo,
+
+// featured,
+
+// technologies
+
+// }=req.body;
+
+
+
+
+// const data={
+
+// title,
+
+// description,
+
+// github,
+
+// demo,
+
+// featured:
+// featured==="true",
+
+// technologies:
+// JSON.parse(technologies)
+
+// };
+
+
+
+
+// if(req.file){
+
+// data.image =
+// `/uploads/projects/${req.file.filename}`;
+
+// }
+
+
+
+
+// const project =
+
+// await prisma.project.update({
+
+// where:{
+
+// id:req.params.id
+
+// },
+
+// data
+
+// });
+
+
+
+// res.json({
+
+// success:true,
+
+// data:project
+
+// });
+
+
+
+// }
+
+// catch(error){
+
+// next(error);
+
+// }
+
+
 // }
 export async function updateProject(req,res,next){
 
@@ -329,7 +516,6 @@ technologies
 
 
 
-
 const data={
 
 title,
@@ -344,25 +530,39 @@ featured:
 featured==="true",
 
 technologies:
+technologies
+?
 JSON.parse(technologies)
+:
+undefined
 
 };
 
 
 
-
 if(req.file){
 
+
+const uploaded =
+await uploadToCloudinary(
+
+req.file,
+
+"portfolio/projects"
+
+);
+
+
+
 data.image =
-`/uploads/projects/${req.file.filename}`;
+uploaded.secure_url;
+
 
 }
 
 
 
-
 const project =
-
 await prisma.project.update({
 
 where:{
@@ -371,7 +571,9 @@ id:req.params.id
 
 },
 
+
 data
+
 
 });
 
@@ -386,7 +588,6 @@ data:project
 });
 
 
-
 }
 
 catch(error){
@@ -397,7 +598,6 @@ next(error);
 
 
 }
-
 // DELETE
 
 export async function deleteProject(req,res,next){
