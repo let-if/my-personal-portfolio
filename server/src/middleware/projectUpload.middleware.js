@@ -68,7 +68,7 @@ import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import cloudinary from "../config/cloudinary.js";
 
-// Configure Cloudinary storage destination directly for serverless (Vercel)
+// Configure Cloudinary storage engine so it works smoothly on Vercel serverless
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
