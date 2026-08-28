@@ -49,23 +49,7 @@ const app = express();
 //   })
 // );
 // Enable preflight-check response for all routes
-app.options("*", cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "http://127.0.0.1:5173",
-      env.CLIENT_URL
-    ];
-    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}), (req, res) => {
-  res.sendStatus(204);
-});
+
 
 app.use(
   cors({
