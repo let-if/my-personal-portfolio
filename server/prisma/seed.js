@@ -48,7 +48,8 @@
 
 // );
 import prisma from "../src/config/db.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 async function main() {
 
