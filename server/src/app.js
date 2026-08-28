@@ -63,7 +63,9 @@ app.options("*", cors({
     }
   },
   credentials: true
-}));
+}), (req, res) => {
+  res.sendStatus(204);
+});
 
 app.use(
   cors({
