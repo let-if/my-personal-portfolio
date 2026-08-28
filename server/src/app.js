@@ -37,18 +37,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 
-// app.use(
-// cors({
 
-// origin:[
-// "http://localhost:5173",
-// "http://127.0.0.1:5173"
-// ],
-
-// credentials:true
-
-// })
-// );
 // app.use(
 //   cors({
 //     origin:[
@@ -59,6 +48,23 @@ const app = express();
 //     credentials:true
 //   })
 // );
+// Enable preflight-check response for all routes
+app.options("*", cors({
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://127.0.0.1:5173",
+      env.CLIENT_URL
+    ];
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -68,8 +74,6 @@ app.use(
         env.CLIENT_URL
       ];
 
-      // Allow requests with no origin (like mobile apps, curl, or Postman)
-      // Or automatically allow any Vercel deployment URL matching your project pattern
       if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
         callback(null, true);
       } else {
