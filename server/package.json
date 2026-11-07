@@ -7,8 +7,7 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "build": "prisma generate",
-    "vercel-build": "prisma generate",
-    "generate-print-qr": "node print-qr.js"
+    "vercel-build": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -36,7 +35,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.14",
-    "qrcode": "^1.5.4",
     "vercel": "^56.3.1"
   },
   "prisma": {
