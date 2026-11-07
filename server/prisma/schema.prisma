@@ -84,7 +84,27 @@ model GitHubCache {
 
   createdAt DateTime @default(now())
 }
+model AdminProfile {
+  id String @id @default(uuid())
 
+  name String
+
+  title String
+
+  bio String @db.Text
+
+  github String?
+
+  linkedin String?
+
+  cv String?
+
+  skills String[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
 enum ContactStatus {
   NEW
 
