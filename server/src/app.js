@@ -51,15 +51,35 @@ const app = express();
 // Enable preflight-check response for all routes
 
 
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       const allowedOrigins = [
+//         "http://localhost:5173",
+//         "http://127.0.0.1:5173",
+//         env.CLIENT_URL
+//       ];
+
+//       if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     credentials: true
+//   })
+// );
 app.use(
   cors({
     origin: (origin, callback) => {
       const allowedOrigins = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        env.CLIENT_URL
-      ];
+        "https://my-personal-portfolio-mpz5.vercel.app", // Your live frontend Vercel URL
+        process.env.CLIENT_URL
+      ].filter(Boolean); // Removes undefined values if CLIENT_URL isn't set
 
+      // Allow requests with no origin (like mobile apps or curl) or if they match allowed list / vercel domains
       if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
         callback(null, true);
       } else {

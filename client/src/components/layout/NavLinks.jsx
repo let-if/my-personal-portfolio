@@ -214,7 +214,7 @@
 // export default NavLinks;
 import React from "react";
 import { Link } from "react-scroll";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"; // <-- Imported here
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { navigation } from "../../constants/navigation";
 
 function NavLinks() {
@@ -222,8 +222,8 @@ function NavLinks() {
     <div className="flex items-center gap-8">
       {/* Navigation Links */}
       <ul className="flex items-center gap-8">
-        {navigation.map((item) => (
-          <li key={item.id}>
+        {(navigation || []).map((item) => (
+          <li key={item.id || item.to}>
             <Link
               to={item.to}
               spy={true}
@@ -239,7 +239,6 @@ function NavLinks() {
                 transition-all
                 duration-300
                 hover:text-white
-
                 after:absolute
                 after:-bottom-2
                 after:left-0
@@ -249,7 +248,6 @@ function NavLinks() {
                 after:bg-cyan-400
                 after:transition-all
                 after:duration-300
-
                 hover:after:w-full
               "
             >
